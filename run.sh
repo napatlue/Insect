@@ -1,0 +1,1 @@
+echo "matlab -r test_dtw" | sh &
