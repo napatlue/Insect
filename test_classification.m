@@ -7,9 +7,7 @@ function  test_classification()
     size(converted_data,1);
     size(converted_data,2);
     TEST_class_labels = data.actual_class;
-    
-      
-    
+     
     da = dbaux(4);
     for i=1 : length(TEST_class_labels)
        % converted_data(i,:) = filter(da,1,converted_data(i,:));
@@ -40,16 +38,20 @@ function  test_classification()
 %       ct = ct(index);
       f = fft(t);
       %f = rceps(t); 
-      f = abs(f); % magnitude 
+      %f = abs(f); % magnitude 
+     
       %transform_data(i,:) = [A1 A2 A3 A4 A5];
+      transform_data(i,:) = f';
     end
     
     %converted_data = converted_data(1:10,:);
     %TEST_class_labels = data.actual_class(1:10);
     for i=1 : length(TEST_class_labels)
         %classify_object = converted_data(i,:);
+        
         classify_object = transform_data(i,:);
         actual_class = TEST_class_labels(i);
+        
         best_distance = inf;
         
         for j=1 : length(TEST_class_labels)
@@ -58,9 +60,9 @@ function  test_classification()
                 compare_object = transform_data(j,:);
                 %this_distance = Distance_Algorithm(classify_object,compare_object);
                 %this_distance = rand_distance(classify_object,compare_object);
-                %this_distance = euclidian_distance(classify_object,compare_object);
+                this_distance = euclidian_distance(classify_object,compare_object);
                 %this_distance = dtw(classify_object,compare_object);
-                this_distance = cosine_distance(classify_object,compare_object);
+                %this_distance = cosine_distance(classify_object,compare_object);
                 
                 %this_distance = sum(abs(compare_object-classify_object)); 
                 %this_distance = sum(abs(compare_object-classify_object)./max(abs(classify_object),0.01));
@@ -73,7 +75,7 @@ function  test_classification()
      
             end
            
-            disp([int2str(correct), ' out of ', int2str(i)]);
+            %disp([int2str(correct), ' out of ', int2str(i)]);
         end
         if(predicted_class == actual_class)
             correct = correct+1;
