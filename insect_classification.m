@@ -1,22 +1,27 @@
 function insect_classification( distance_func )
-
+    wave_path = 'wavefiles/';
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
     %Distance_Algorithm = makeHandle(distance_func);
     %Distance_Algorithm = str2function(distance_func);
-    TEST_DATA = dir('*.wav');
+    TEST_DATA = dir([wave_path,'*.wav']);
+    
     TEST_class_labels = importdata('classLabel.mat');
     correct = 0;
     
     for i=1 : length(TEST_class_labels)
-        classify_object = wavread(TEST_DATA(i).name);
+        classify_filename = TEST_DATA(i).name;
+        
+        classify_object = wavread([wave_path, classify_filename]);
+        
         actual_class = TEST_class_labels(i,2);
         best_distance = inf;
         
         for j=1 : length(TEST_DATA)
             if(j ~= i)
-                compare_object = wavread(TEST_DATA(j).name);
+                compare_filename = TEST_DATA(j).name;               
+                compare_object = wavread([wave_path, compare_filename]);
                 %this_distance = Distance_Algorithm(classify_object,compare_object);
                 this_distance = euclidian_distance(classify_object,compare_object);
                 if(this_distance < best_distance)
@@ -26,7 +31,7 @@ function insect_classification( distance_func )
                 
                 
             end
-           j
+           
         end
         if(predicted_class == TEST_class_labels(j,2))
             correct = correct+1;
