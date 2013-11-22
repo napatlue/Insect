@@ -9,10 +9,13 @@ function  test_classification()
     TEST_class_labels = data.actual_class;
      
     da = dbaux(4);
+    size(TEST_class_labels,1)
+    
+    extracted = extract_feature(converted_data);    
     for i=1 : length(TEST_class_labels)
        % converted_data(i,:) = filter(da,1,converted_data(i,:));
-      t = converted_data(i,:);
-
+      %t = converted_data(i,:);
+       t = extracted(i,:);
       %[D1,D2,D3,D4,D5,A1,A2,A3,A4,A5] = wav_extract(t);
       %D1=abs(D1/norm(D1));
       %D2=abs(D2/norm(D2));
@@ -37,13 +40,19 @@ function  test_classification()
 %       index = (L(1)+1):length(ct);
 %       ct = ct(index);
       f = fft(t);
-      %f = rceps(t); 
-      %f = abs(f); % magnitude 
-     
-      %transform_data(i,:) = [A1 A2 A3 A4 A5];
+      f = rceps(t); 
+      f = abs(f); % magnitude 
+      
+      
       transform_data(i,:) = f';
+      
+      %transform_data(i,:) = [A1 A2 A3 A4 A5];
+      %[COEFF,SCORE,latent] = princomp(f);
+      %transform_data(i,:) = SCORE;
+      
+      
     end
-    
+    %extracted = extract_feature(transform_data);
     %converted_data = converted_data(1:10,:);
     %TEST_class_labels = data.actual_class(1:10);
     for i=1 : length(TEST_class_labels)
