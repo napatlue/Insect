@@ -15,44 +15,19 @@ function  test_classification()
     %for i=1 : length(TEST_class_labels)
        % converted_data(i,:) = filter(da,1,converted_data(i,:));
       %t = converted_data(i,:);
+     %  t = extracted(i,:);
 
-       t = extracted(i,:);
-      %[D1,D2,D3,D4,D5,A1,A2,A3,A4,A5] = wav_extract(t);
-      %D1=abs(D1/norm(D1));
-      %D2=abs(D2/norm(D2));
-%       D3=abs(D3/norm(D3));
-%       D4=abs(D4/norm(D4));
-%       D5=abs(D5/norm(D5));
-%       A1=std(A1/norm(A1));
-%       A2=std(A2/norm(A2));
-%       A3=std(A3/norm(A3));
-%       A4=std(A4/norm(A4));
-%       A5=std(A5/norm(A5)); 
-      
-      %[ca,cb] = dwt(t,'db12');
-      %da = dwt(ca,'db12');
-      %ea = dwt(da,'db12');
-      %fa = dwt(ea,'db12');
-      %[C,L] = wavedec(converted_data(i,:),6,'db12');
-      %ea = normc(ea);
-        
-%       w = 'db12';
-%       [ct,L]=wavedec(t,5,w);
-%       index = (L(1)+1):length(ct);
-%       ct = ct(index);
-      f = fft(t);
+      %f = fft(t);
       %f = rceps(t); 
-      f = abs(f); % magnitude 
-      f = fft(f);
-      f = abs(f);
+      %f = abs(f); % magnitude 
       
-      disted = peak_distance(f(:,1:2048));
-      transform_data(i,:) = disted;
-
+      
       %transform_data(i,:) = f';
       
       %transform_data(i,:) = [A1 A2 A3 A4 A5];
-  
+      %[COEFF,SCORE,latent] = princomp(f);
+      %transform_data(i,:) = SCORE;
+      
       
     %end
     %extracted = extract_feature(transform_data);
