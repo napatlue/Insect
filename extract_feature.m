@@ -31,6 +31,7 @@ function [ curr_features ] = extract_feature( series )
             %    k = k-1;
             %end
             exit_f = false;
+            
             break
         end
 
@@ -41,8 +42,9 @@ function [ curr_features ] = extract_feature( series )
         for k=1:size(curr_dss,1)
             sum_last_ene = sum_last_ene + energy(curr_dss(k, :));
         end
+        
     end
-    
+    j
         
    
 end

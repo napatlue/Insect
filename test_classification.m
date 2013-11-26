@@ -40,16 +40,17 @@ function  test_classification()
 %       index = (L(1)+1):length(ct);
 %       ct = ct(index);
       f = fft(t);
-      f = rceps(t); 
+      %f = rceps(t); 
       f = abs(f); % magnitude 
+      f = fft(f);
+      f = abs(f);
       
-      
-      transform_data(i,:) = f';
+      disted = peak_distance(f(:,1:2048));
+      transform_data(i,:) = disted;
+      %transform_data(i,:) = f';
       
       %transform_data(i,:) = [A1 A2 A3 A4 A5];
-      %[COEFF,SCORE,latent] = princomp(f);
-      %transform_data(i,:) = SCORE;
-      
+  
       
     end
     %extracted = extract_feature(transform_data);
