@@ -87,7 +87,7 @@ function  test_classification2()
 %         tmp = waverec(coefs,longs,'db4');
 %         transform_data(j,:) = abs(fft(tmp));
 %     end
-    transform_data=zeros(1100,1);
+    transform_data=zeros(1100,6);
      for i = 1:size(converted_data ,1)
         [ pks,locs,dist12,dist23] = getpeaks(converted_data(i,:));
         %transform_data(i,1) = dist12;
@@ -98,7 +98,7 @@ function  test_classification2()
         transform_data(i,4) = pks(1);
         transform_data(i,5) = pks(2);
         transform_data(i,6) = size(pks,2)^2;
-        
+
         
 %         if(size(locs,2)>=3)
 %             transform_data(i,3) = locs(3);
@@ -109,9 +109,13 @@ function  test_classification2()
      D = pdist(transform_data,'cityblock');
      Dm = squareform(D);
      
-     [Y,eigvals] = cmdscale(D);
-     C = get_class_color( TEST_class_labels );
-     scatter(Y(:,1),Y(:,2),10,C);
+     Dcs = pdist(converted_data,'seuclidean');
+     %Dcs = pdist(converted_data,'cityblock');
+     Dmcs = squareform(Dcs);
+     
+     %[Y,eigvals] = cmdscale(D);
+     %C = get_class_color( TEST_class_labels );
+     %scatter(Y(:,1),Y(:,2),10,C);
      
      
     %transform_data = abs(transform_data);
@@ -134,7 +138,8 @@ function  test_classification2()
                 %this_distance = cosine_distance(classify_object,compare_object);
                 
                 %this_distance = cityblock_distance(classify_object,compare_object);
-                this_distance = Dm(i,j);
+                this_distance = 1.3*Dm(i,j)+Dmcs(i,j)^4;
+                %this_distance = Dmcs(i,j);
                 %this_distance = sum(abs(compare_object-classify_object)); 
                 %this_distance = sum(abs(compare_object-classify_object)./max(abs(classify_object),0.01));
                 %this_distance = 1 - ami(classify_object,compare_object);
