@@ -24,6 +24,7 @@ function [ output_args ] = plot_class_fft( timeseries, class_label )
             subplot(6,2,i);
             %set(h,'position',[0.3    0.1100    0.1347    0.8150]) 
             plot(t(1:round(size(t,2)/2)));
+            %plot(t);
             dist = peak_distance(t(1:round(size(t,2)/2)))
             if i == 12
                 break

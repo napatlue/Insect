@@ -3,10 +3,10 @@ function [ dist ] = peak_distance( timeserie )
 %   Detailed explanation goes here
     sorted = sort(abs(timeserie(1,:)),'descend');
     max = sorted(1,1);
-    min = sorted(1,100);
-   
-    step = 100;
-    
+    %min = sorted(1,100);
+    min = 0.2*max;
+    min_step = 100;
+    max_step = 1000;
     %find peaks  
     j = 1;
     for i=1:size(timeserie,2)-3
@@ -23,21 +23,34 @@ function [ dist ] = peak_distance( timeserie )
         end
        
     end
-     
-    dist = 0;
-    sorted_res = sortrows(res,-2)
-    old_dis = sorted_res(1,1);
     
+    dist = 0;
+    sorted_res = sortrows(res,-2);
+    old_dis = sorted_res(1,1);
+    %old_dis = res(1,1);
+    %res
+    %for i=2:size(res,1)
+    %    new_dis = abs(res(i,1)-old_dis);
+    %    %new_dis
+    %    if new_dis > step
+    %        dist = new_dis;
+    %        break
+    %    end
+    %    old_dis = res(i,1);
+    %end
+    %sorted_res
     for i=2:size(sorted_res,1)
         
         new_dis = abs(sorted_res(i,1) - old_dis);
         
-        if new_dis > step           
+        if new_dis > min_step          
             dist = new_dis;
             break
         end
         
     end
-    
+    if dist == 0
+        dist = old_dis;
+    end
 end
 
