@@ -43,7 +43,7 @@ if nargin < 4
         end
         wininc = winsize;
     end
-    error('Please provide the sampling frequency of this signal')
+    %error('Please provide the sampling frequency of this signal')
 end
 
 datawin = ones(winsize,1);
