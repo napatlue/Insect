@@ -118,9 +118,9 @@ function  test_classification2()
      %Dcs = pdist(converted_data,'cityblock');
      Dmori = squareform(Dori);
      
-     %[Y,eigvals] = cmdscale(D);
-     %C = get_class_color( TEST_class_labels );
-     %scatter(Y(:,1),Y(:,2),10,C);
+     [Y,eigvals] = cmdscale(Dcs);
+     C = get_class_color( TEST_class_labels );
+     scatter(Y(:,1),Y(:,2),10,C);
      
      
     %transform_data = abs(transform_data);
