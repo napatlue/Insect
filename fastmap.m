@@ -9,8 +9,7 @@ function [X,Y] = fastmap(A,color)
 		M(i,2)= maxD(hA,temp3);     
 		M(i,3)=max(sumD);     
 		temp3=maxD(hA,temp3);
-	end
-<<<<<<< HEAD
+    end
 	
 	X=eachDist(hA,M,A); 
 	Y=secD(A,hA,X); 
@@ -36,33 +35,7 @@ function [X,Y] = fastmap(A,color)
         sumD=sum(D,2); 
         [R,C]=max(sumD); 
         maxIndex=C; 
-         
-=======
-	%M
-	X=eachDist(hA,M,A); 
-	Y=secD(A,hA,X); 
-	C=cat(1,X,Y);
- 	[hC,lC]=size(C); 
-    for s=1:lC 
-		hold on; 
-		plot(C(1,s),C(2,s),'.b') 
-		hold off; 
-    end 
- 	hold on; 
-	plot(C(1,150),C(2,150),'*r') 
- 	hold off; 
-	warning on 
-    function maxIndex=maxD(hA,maxI) 
-        %maxI
-        for j=1:hA 
-            D(j,:)=(A(maxI,1:lA-1)-A(j,1:lA-1)).^2; 
-        end 
-        %D 
-        sumD=sum(D,2); 
-        [R,C]=max(sumD); 
-        maxIndex=C; 
-        %maxIndex
->>>>>>> 1faeebad3cf23d41f12ded9cc0f9c2d158896fce
+
     end 
     function X=eachDist(hA,M,A) 
         a=M(5,1); 
@@ -77,7 +50,6 @@ function [X,Y] = fastmap(A,color)
 		end 
 
 		X=X; 
-<<<<<<< HEAD
 		 
 	end 
 
@@ -106,37 +78,9 @@ function [X,Y] = fastmap(A,color)
             Y(j)=(D2sec(e,j).^2+temp4-D2sec(f,j).^2)/(2*sqrt(temp4)); 
         end 
         Y=Y; 
-=======
-		X;
+
 	end 
 
-	function Y=secD(A,hA,X) 
-	e=0;
-	f=0;
-	temp4=0;
-	for i=1:hA 
-		for j=1:hA
-			D2(i,j)=sum((A(i,:)-A(j,:)).^2); 
-			X2(i,j)=(X(i)-X(j)).^2; 
-			D2sec(i,j)=D2(i,j)-X2(i,j); 
-		 end 
-	end 
-	for  i=1:hA  
-		for j=1:hA  
- 			if D2sec(i,j)>temp4 
- 				temp4=D2sec(i,j);   
-				e=i;
- 				f=j;
- 			end 
- 		end 
- 	end 
- 
-	for j=1:hA 
- 		Y(j)=(D2sec(e,j).^2+temp4-D2sec(f,j).^2)/(2*sqrt(temp4)); 
- 	end 
-	Y=Y; 
->>>>>>> 1faeebad3cf23d41f12ded9cc0f9c2d158896fce
-	end 
  
 end
 
