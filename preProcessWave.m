@@ -1,24 +1,25 @@
-function result = preProcessWave(data)
+function [result,ori] = preProcessWave(data)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
-        for i = 1:size(data ,1)
+      for i = 1:size(data ,1)
  %         %[C(i,:),L] = wavedec(converted_data(i,:),14,'db4');
-         [a1,d1] = dwt(data(i,:),'db16');
+         [a1,d1] = dwt(data(i,:),'db12');
          datax(i,:) = a1;
          
       end
 
-
+    ori = zeros(size(data,1),4500);
 
     result =zeros(size(datax,1),floor(size(datax,2)/2)-1);
     for i=1:size(datax,1)
         
-        %minHeight = max(data(i,:))/3;
+        minHeight = max(data(i,:))/3;
         
         
-        %[pks,locs] = findpeaks((data(i,:)),'MINPEAKHEIGHT',minHeight, 'NPEAKS',1,'minpeakdistance',3);
+        [pks,locs] = findpeaks((data(i,:)),'MINPEAKHEIGHT',minHeight, 'NPEAKS',1,'minpeakdistance',3);
+        oo = circshift(data(i,:),[0 -(locs(1)-1500)]);
+        ori(i,:) = oo(1:4500);
         
-        %tmp = circshift(data(i,:),[0 -(locs(1)-1500)]);
         tmp = abs(fft(datax(i,:)));
         result(i,:) = tmp(2:floor(end/2)); %ignore f0
         
