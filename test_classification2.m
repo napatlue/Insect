@@ -1,4 +1,4 @@
-function  test_classification2()
+function  Dmcs=test_classification2()
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
     data = sound2vector();
