@@ -1,6 +1,10 @@
 Step to run:
+Here we provide steps of running Insect Classifier
 
-1. create folder ./wavefiles/ at the directory to run program
+The demo contains:
+1. The folder ./wavefiles/ contains wav files of insects.
 2. place the sound clip to /wavefiles/ directory
-3. put classLabel.mat(label of class of sound file) to the same directory at run.sh
-4. sh run.sh
+3. the classLabel.mat(label of class of sound file) in current directory contains the corresponding wav file names and the mapped classes.
+
+To run the demo:
+> make
