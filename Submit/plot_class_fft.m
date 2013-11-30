@@ -1,5 +1,5 @@
-function [ output_args ] = plot_class( timeseries, class_label )
-% plot timeseries that classified into class_label
+function t = plot_class_fft( timeseries, class_label )
+% plot FFTed timeseries that classified into class_label
     class_labels = importdata('classLabel.mat');
     res = zeros(1,1);
     for i=1:size(class_labels(:,1),1)
@@ -16,10 +16,17 @@ function [ output_args ] = plot_class( timeseries, class_label )
             %res(1,i)
             t = timeseries(res(1,i),:);
             
+            t = fft(t);
+            %t = rceps(t);
+            t = abs(t);
+            
+            
             subplot(6,2,i);
             %set(h,'position',[0.3    0.1100    0.1347    0.8150]) 
-            plot(t(1:(size(t,2))));
-           % dist = peak_distance(t(1:round(size(t,2)/2)))
+
+            plot(t(1:round(size(t,2))));
+
+            dist = peak_distance(t(1:round(size(t,2)/2)))
             if i == 12
                 break
             end

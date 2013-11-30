@@ -1,0 +1,6 @@
+Step to run:
+
+1. create folder ./wavefiles/ at the directory to run program
+2. place the sound clip to /wavefiles/ directory
+3. put classLabel.mat(label of class of sound file) to the same directory at run.sh
+4. sh run.sh

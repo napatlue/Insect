@@ -1,6 +1,5 @@
 function recons = extract_wavelet_coeff(time_series,level,name)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+%Function to reconstruct time series after extract wavelet coefficient
     recons =zeros(size(time_series,1),size(time_series,2));    
 
     for i = 1:size(time_series,1)
