@@ -1,6 +1,5 @@
 function [ lof] = LRD( timeseries, k )
-%UNTITLED13 Summary of this function goes here
-%   Detailed explanation goes here
+%Function to calculate local reachable distance in LOF algorothm
     D = pdist(timeseries,'euclidean');
     Dm = squareform(D);
     

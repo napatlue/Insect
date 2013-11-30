@@ -1,12 +1,11 @@
 function [result,ori] = preProcessWave(data)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
-      for i = 1:size(data ,1)
- %         %[C(i,:),L] = wavedec(converted_data(i,:),14,'db4');
-         [a1,d1] = dwt(data(i,:),'db12');
-         datax(i,:) = a1;
+%Preprocessing the wave
+    % Get level 1 approximation using wavelet
+    for i = 1:size(data ,1)
+       [a1,d1] = dwt(data(i,:),'db12');
+       datax(i,:) = a1;
          
-      end
+    end
 
     ori = zeros(size(data,1),4500);
 
@@ -15,26 +14,15 @@ function [result,ori] = preProcessWave(data)
         
         minHeight = max(data(i,:))/3;
         
-        
+        % Shift time series
         [pks,locs] = findpeaks((data(i,:)),'MINPEAKHEIGHT',minHeight, 'NPEAKS',1,'minpeakdistance',3);
         oo = circshift(data(i,:),[0 -(locs(1)-1500)]);
         ori(i,:) = oo(1:4500);
-        
+        % Do fft
         tmp = abs(fft(datax(i,:)));
         result(i,:) = tmp(2:floor(end/2)); %ignore f0
         
     end
-
-    
-     %     for i = 1:size(converted_data ,1)
- %         %[C(i,:),L] = wavedec(converted_data(i,:),14,'db4');
- %        [a1,d1] = dwt(converted_data(i,:),'db4');
- %        [a2,d2] = dwt(a1,'db4');
- %        [a3,d3] = dwt(a2,'db4');
- %        transform_data(i,:) = [a2,a3];
-         
- %     end
-    
     
 end
 

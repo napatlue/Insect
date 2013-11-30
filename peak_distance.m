@@ -1,6 +1,5 @@
 function [ dist ] = peak_distance( timeserie )
-%UNTITLED8 Summary of this function goes here
-%   Detailed explanation goes here
+%find feak distance
     sorted = sort(abs(timeserie(1,:)),'descend');
     max = sorted(1,1);
     %min = sorted(1,100);
@@ -27,18 +26,7 @@ function [ dist ] = peak_distance( timeserie )
     dist = 0;
     sorted_res = sortrows(res,-2);
     old_dis = sorted_res(1,1);
-    %old_dis = res(1,1);
-    %res
-    %for i=2:size(res,1)
-    %    new_dis = abs(res(i,1)-old_dis);
-    %    %new_dis
-    %    if new_dis > step
-    %        dist = new_dis;
-    %        break
-    %    end
-    %    old_dis = res(i,1);
-    %end
-    %sorted_res
+
     for i=2:size(sorted_res,1)
         
         new_dis = abs(sorted_res(i,1) - old_dis);

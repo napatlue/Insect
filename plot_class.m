@@ -1,5 +1,5 @@
 function [ output_args ] = plot_class( timeseries, class_label )
-% plot FFTed timeseries that classified into class_label
+% plot timeseries that classified into class_label
     class_labels = importdata('classLabel.mat');
     res = zeros(1,1);
     for i=1:size(class_labels(:,1),1)
@@ -15,11 +15,6 @@ function [ output_args ] = plot_class( timeseries, class_label )
         if res(1,i) ~= 0
             %res(1,i)
             t = timeseries(res(1,i),:);
-            
-            %t = fft(t);
-            %t = rceps(t);
-            %t = abs(t);
-            
             
             subplot(6,2,i);
             %set(h,'position',[0.3    0.1100    0.1347    0.8150]) 
