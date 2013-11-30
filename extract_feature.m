@@ -1,6 +1,5 @@
 function [ curr_features ] = extract_feature( series )
-%UNTITLED5 Summary of this function goes here
-%   Detailed explanation goes here
+%Extract Feature form Haar wavelet
     j = log2(size(series,2));
     J = ceil(j);
     %last_features = zeros(size(series,1),:);
@@ -44,7 +43,6 @@ function [ curr_features ] = extract_feature( series )
         end
         
     end
-    j
         
    
 end

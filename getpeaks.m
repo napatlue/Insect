@@ -1,6 +1,5 @@
 function [ pks,locs,dist12,dist23] = getpeaks(ts)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+%Get information of peak from time series
     dist23 = 0;
     dist12 = 0;
     mm = max(ts);

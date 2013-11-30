@@ -1,6 +1,5 @@
 function C = get_class_color( class )
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+%Get class color for plot
     C = zeros(size(class,1),3);
     for i=1:size(class,1)
         if(class(i)==1)

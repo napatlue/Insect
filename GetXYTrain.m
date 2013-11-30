@@ -1,6 +1,5 @@
 function [XTrain,YTrain] = GetXYTrain( Xtrain,Ytrain,testInstanceLabel )
-%UNTITLED5 Summary of this function goes here
-%   Detailed explanation goes here
+%get train set
     count = 0;
     for i = 1:size(testInstanceLabel,1)
        if(testInstanceLabel(i) == 0)

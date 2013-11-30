@@ -1,4 +1,5 @@
 function [X,Y] = fastmap(A,color) 
+% Compute and plot graph on time series using fastmap
 	warning off 
     M=ones(5,3);   
 	[hA,lA]=size(A); 
@@ -12,17 +13,7 @@ function [X,Y] = fastmap(A,color)
     end
 	
 	X=eachDist(hA,M,A); 
-	Y=secD(A,hA,X); 
-	%C=cat(1,X,Y) 
- 	%[hC,lC]=size(C)
-    %for s=1:lC 
-	%	hold on; 
-	%	plot(C(1,s),C(2,s),'.b'); 
-	%	hold off; 
-    %end 
- 	%hold on; 
-	%plot(C(1,150),C(2,150),'*r') 
- 	%hold off; 
+	Y=secD(A,hA,X);  
     scatter(X',Y',10,color);
     
 	warning on 

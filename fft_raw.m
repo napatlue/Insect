@@ -1,6 +1,5 @@
 function [ res ] = fft_raw( timeseries )
-%UNTITLED9 Summary of this function goes here
-%   Detailed explanation goes here
+%doing fourier transform
     [rc,cc] = size(timeseries);
     res = zeros(rc+1,cc);
     
