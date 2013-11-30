@@ -1,0 +1,48 @@
+1. makefile:
+   type 'make' to compile and run demo classification program
+   type 'make paper.pdf' to compile latex report  (You must have pdflatex installed)
+                         or you can use the complied pdf (826report.pdf) under DOC dir.
+   type 'make clean' to remove temp files.
+
+2. find_outlier.m
+   Param path: path that contains wav files that outliers are to be checked.
+   Param k: k neighbours (We are using LOF algorithm)
+
+3. plot_class_fft.m 
+   generate plots for at most 12 wav files within the same class.
+   Param timeseries: wav files that have been transformed into matrix.
+   Param class_label: the classLabel of wav files that you want to plot.
+
+4. fastmap.m
+   generate plot using fastmap algorithm 
+   Param A: data matrix
+   Param color: variable return from get_class_color.m
+
+5. LRD.m
+   used in find_outlier.m
+
+6. MDSplot.m
+   plot using MDS
+
+7. SVDplot.m
+   plot using SVD
+
+8. train_peak_dist.m
+   Customized distance function, after FFT, using distance between peaks as feature
+   Param timeseries: transformed wavfiles (matrix)
+   Param classlabels: matrix that contains mapping between wav files and classlabels
+
+9. run_classification.m
+   Demo classification program, which used the customized distance function that performs the best.
+
+10. getpeaks.m, peak_distance.m
+    Used by train_peak_dist.m, find peaks and calculate distance between peaks.
+
+11. PartitionHeldOut.m, GetXYTrain.m, GetXYTest.m
+    Divide wavefiles into Training set and Test set.
+
+12. energy.m
+    part feature extraction algorithm, calculate energy for time serie.
+
+13. extract_feature.m
+    Feature extraction algorithm, including Haar transformation and feature extraction. 

@@ -1,0 +1,30 @@
+% {\em
+% \bit
+% \item
+% what is the problem
+% \item
+% what are the applications
+% \eit
+% }
+{\small \em Specify the problem; Give the motivation; 
+List your main contributions}
+
+The problem we want to solve is the following:
+\bit
+\item GIVEN: a collection of 1100 sound clips, of similar duration,
+      and each having a class label among 11 classes
+\item FIND: a clip-to-clip similarity function
+\item to MINIMIZE: the classification error, in the 1-nearest-neighbor
+      classifier.
+\item Visualize data from high dimensional space so that we can get intuition of properties of each classes.
+\item Spot outliers in dataset
+\eit
+
+This is an important problem, because standard distance function can not capture similarity between time series well; especially time series generated from a sound clip which contain a lot of noise and are in different phases.
+
+The contributions of this project are the following:
+\bit
+\item our proposed method is novel, combining weight distance of features extracted from frequency domain with distance in time domain and also used preprocessing steps includind wavelet transformation to extract approximation of time series, shift the starting point of time series to the same point.
+\item it is effective, achieving 61.55\% classification accuracy far better than standard Euclidean Distance which is 35.73\% accuracy
+\item it is scalable, being linear on the number of sound-clips $N$.
+\eit

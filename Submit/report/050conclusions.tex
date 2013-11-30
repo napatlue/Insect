@@ -1,0 +1,33 @@
+The proposed method to use features in frequency domain and combine with distance in time domain has the following advantages:
+\bit
+\item it gives better classification accuracy than all of the methods we have tried
+\item its accuracy is better than all standard distance function
+\item it is scalable as it scale linearly with data.
+\eit
+
+The below table show the Error rate (1-accuracy) of all methods we've tried
+
+\begin{table}[H]
+\caption{Error rate of each methods}
+\centering 
+\begin{tabular}{c c}
+\hline\hline 
+Method & Error Rate\\[0.5ex] 
+\hline
+%heading
+    Euclidean Distance & 0.64273 \\
+    Cosine Similarity & 0.54636 \\
+    Dynamic Time Warping & 0.63 \\
+    Cepstrum & 0.43636 \\
+    Shifting + Cosine & 0.52909 \\
+    Fourier + Cosine & 0.40091 \\
+    Wavelet + Fourier + Cosine & 0.39455 \\
+    Average peak distance & 0.5864 \\ 
+    Fourier + Feature extraction & 0.46455 \\ 
+    Wavelet + Fourier + Feature extraction  & 0.38727 \\
+    Custom distance function using combined method & 0.38455\\
+    [1ex]
+ 
+\hline
+\end{tabular}
+\end{table}

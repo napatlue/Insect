@@ -1,0 +1,12 @@
+The main motivation for our method is raw time series data are noisy and out of phase so we can not find any good distance function on data as it is. We use signal processing to extract meaningful data and classify time series based on that extracted data.\\
+
+The methods we proposed are as follows:
+\begin{enumerate}
+\item Preprocess time series by Shifting all time series to have the same starting position of sound occurrence.
+\item Preprocess time series by extract feature from wavelet (using the algorithm to get wavelet approximation as feature)
+\item Preprocess time series by doing Fourier Transform
+\item Using average peak distance as a rule for classification
+\item Extract features from frequency domain for classification
+\item Combine distance function from several methods above
+\end{enumerate}
+

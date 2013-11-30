@@ -1,0 +1,141 @@
+Next we list the papers that each member read,
+along with their summary and critique.
+Table \ref{tab:symbols} gives a list of common symbols we used.
+
+\begin{table}[htb]
+\begin{center} 
+\begin{tabular}{|l | c | } \hline \hline 
+Symbol & Definition \\ \hline
+$N$ & number of sound-clips \\
+$D$ & average duration of a sound-clip \\
+$k$  & number of classes \\ \hline
+\end{tabular} 
+\end{center} 
+\caption{Symbols and definitions}
+\label{tab:symbols} 
+ \end{table} 
+
+
+\subsection{Papers read by Yanan Jian}
+The first paper was the On the Need for Time Series Data Mining Benchmarks: A Survey and Empirical Demonstration by EAMONN KEOGH and SHRUTI KASETTY
+
+\begin{itemize*}
+\item {\em Main idea}: A comparison between different time series data mining methods on real world data set. \\\\
+Sequential Scanning: Euclidian distance. Measuring similarity by calculating the distance of two points on the same time spot. \\\\
+This approach can be optimized by neglecting taking the square root. The other way to optimize this approach is to keep comparing the current best variable to the partial sums by the end of each iteration of the loop, if partial sum exceeds the current\_best, we can stop iteration. Euclidian distance is a fast algorithm because it is O(n) and sequential scan can take advantage of an optimized linear traverse of the disk.\\\\
+However, Euclidian distance can not solve the problem when two time series are similar in shape but have time difference like .\\\\
+Dynamic Time Warping is a technique that measures the distance between two time series after first aligning them in the time axis. It can solve the problem of two time series having the same shape but with time difference, however, the algorithm is  $O(n^2)$, which can not be indexed. There is also an optimization named 'lower bounding', lower bounding is for detecting how far apart the two time series are. If the lower bound distance to a sequence \geslant current\_best variable, we can prune off the fraction. \\\\
+Time Series segmentation algorithms: Sliding Windows, Top Down and Bottom Up. Through the experiments from this paper, the best segmentation can bet reached by Bottom Up.\\
+\item {\em Use for our project}:\\
+      We can use DTW with lower bounding method to improve efficiency when calculating distance between time series. In order to get the best segments we can use Bottom-Up algorithm. 
+\item {\em Shortcomings}:\\
+      Time warping algorithm is $O(n^2)$, besides lower bounding, we have to figure out a better way to optimize the algorithm. 
+\end{itemize*}
+
+The second paper was the FastMap: A Fast Algorithm for Indexing, Data-Mining and Visualization of Traditional and Multimedia Datasets by Christos Faloutsos and King-Ip (David) Lin
+\begin{itemize*}
+\item {\em Main idea}:
+ Develop a fast algorithm to convert objects into points in k-dimensional space instead of using the traditional k feature-extraction functions.\\\\
+Fast Map: solve the problem of visualize high dimensional object, achieve the goal of finding N points in k-d space.. The Euclidean distances of the points have to match the distances of a given N*N distance matrix. \\\\
+1, choose pivot objects first, and project objects onto the line that passes through them in using cosine law. \\\\
+2,choose pivot: We have to ensure the line between the pivot which objects will be projected on have the advantage that the projections are as far apart from each other as possible. Traditionally, it would compute all the pairs of points which will require $O(n^2)$ computations. But the paper proposed a heuristic algorithm as: choose-distant-objects which randomly choose a point first, compute the farthest point with it, and based on the farthest point, find another one who is the farthest from that one. Finally we can recursively find the pivots. \\\\
+3, Fast Map is O(1) with respect to database size N.\\\\
+4, After we reduce the dimension using fast map, we can visualize the objects in k-dimension area.\\
+\item {\em Use for our project}:\\
+1, There will be large dimensions after extracting features from objects, so we have to do a projection and draw the plots. Fast Map is linear on the database size and can reduce the N dimensions to k which we can specify.  \\\\
+2, After transforming objects into points, we get large dimensions of each object, if we use Time Warping algorithm to calculate the similarity between objects, it would be extremely slow due to the unconsolidated high dimensional computing, we can try to use fast map to reduce dimension before calculating similarity.\\
+\item {\em Shortcomings}:\\
+Fast Map try to preserve as much as the distances between objects. It will at some point lose precision.\\\\
+\end{itemize*}
+The third paper was An enhanced representation of time series which allows fast and accurate classification, clustering and relevance feedback by Eamonn J. Keogh and Michael J. Pazzani 
+\begin{itemize*}
+\item {\em Main idea}:
+Main Idea: The traditional representation of Time Series is Fourier transformations, relational trees  and envelope matching/R+ trees. But they can not perform well with noise. Piece-wise linear segmentation is a better representation of data, it connects two points with straight lines which filters noise. However, all segments are with the same weight, which is impractical in real industry. The idea is that we can add weight to linear segments during training.\\
+
+1, First we initialize the weight of all segments to one. \\\\
+2, Align the endpoints of the two sequences being compared.\\\\
+3, Merge time series, if sequence A and sequence B are in the same class (during training), we merge A and B to C, which combines information from A and B. The weight vector of C represents the the similarities between A and B.  Because this is the positive training, the weights for similar segments are amplified and the differences are reduced. \\\\
+4, Negetive training, after merging A and B( from training set, different from class A), add negative weight to B, so that the differences of the two series are amplified and the weights for similar segments are reduced.\\\\
+5, Classification: Use group average agglomerative to aggregate positive examples, repeat until all positive segments are calculated and a single sequence remains. Do the same iteration on negative examples. \\\\
+\item {\em Use for our project}:\\
+We can use this improved Time Warping algorithm to add weight on our training set, which may generate a better result.\\\\
+\item {\em Shortcomings}:\\
+There's a trade off of how many segments we have to make from the time series. If there are too few segments, the weight may lead to a worse result because the representation of the time series is not accurate, then the weight will only amplify the inaccurate part. But if there are too many segments, the classification will become inefficient. 
+
+\end{itemize*}
+
+\subsection{Papers read by Napat Luevisadpaibul }
+The first paper was the "Searching and Mining Trillions of Time Series Subsequences under Dynamic Time Warping" by Thanawin Rakthanmanon,Bilson Campana, Abdullah Mueen, Gustavo Batista, Brandon Westover, Qiang Zhu, Jesin Zakaria and Eamonn Keogh
+
+\begin{itemize*}
+\item {\em Main idea}: This paper proposed 4 new ways,collectively called "UCR Suite",to optimize Dynamic Time Warping(DTW) and Uclidean Distance(ED) measure. They test their algorithm with various real world dataset and compare the performance against SOTA ED(State of the Art Euclidean Distance and SOTA DTW(State of the Art Dynamic Time Wrapping)).They show that they can achieve better performance than both SOTA DTW/SOTA ED in very large data set(trillion data) making it possible to solve time series data mining problem such as motif discovery and clustering at much more larger scale. Their new four ways of optimization are as follows:\\\\
+1. Early Abandoning Z-Normalization:  They incrementally compute the Z-normalization along with the ED (or LB\_Keogh) of the same datapoint. In case of early abandon, they can prune both distance calculation step and normalization steps too. Note that they need normalization
+step because in similarity search, every subsequence needs to be normalized before it is compared to the query.\\\\
+2. Reordering Early Abandoning: They reorder the datapoint before doing the incrementally summation because different order produce different number of steps before early abandon. They conclude that the optimal ordering is to sort the indices based on the absolute values of the Z-normalized Q becasue they assume that the query farther from mean will have larger contribution to the distance function.
+\\\\
+3. Reversing the Query/Data Role in LB\_Keogh: They calculate LB\_Keogh  envelope around each candidate only if all other lower bounds fail to prune instead of calculating LB\_Keogh envelop around query in normal case. This removes space overhead\\\\
+4. Cascading Lower Bounds: They use several of the lower bound methods in a cascade. First they use the O(1) LB\_KimFL, which while a very weak lower bound prunes many objects. If a candidate is not pruned at this stage,then they compute the LB\_KeoghEQ so the candidate may be abandoned anywhere between O(1) and O(n) time.\\\\
+\item {\em Use for our project}:\\
+      We may apply these optimizations for DTW/ED to our distance function possibly the adaptation of DTW. Normal DTW computation cost is expensive thus we have to use various methods to prune as many branches as we can.
+\item {\em Shortcomings}:\\
+      Although they claim that these methods work well with several large data set, they have not mention time series data which a lot of noises such as sound files in our insect mining project.Both ED and DTW may not work well with our data set.
+\end{itemize*}
+
+The second paper was "An Enhanced Approach for LOF in Data Mining" by Vishal Bhatt. K. G. Sharma and Anant Ram
+\begin{itemize*}
+\item {\em Main idea}:
+Main Idea: Generally, data in dataset follow some specific model but some exceptional data in dataset may not fit with the model. These data are called an outlier. The Local Outlier Factor (LOF) technique is efficient outliers mining algorithm that can quantify how much an outlying a certain data is in that database. The neccessary definitions to explain LOF are as follows:
+\\
+k is a user supplied natural number\\\\
+Definition 1: k-distance of an object p denoted as k- distance (p) :- the distance between object p and its kth nearest neighbor. \\\\
+Definition 2: k-distance neighborhood of an object p denoted as Nk-distance(p) :- The
+Nk-distance(p) contains every object whose distance from p is not greater than the k-distance.\\\\
+Definition 3: reachability distance of p with respect to object o denoted by reach-distk(p, o):- The maximum distance out of k-distance of an object o and real distance between p and o.\\\\
+Definition 4: local reachability density of an object p denoted as lrd (p) :- The local reachability density of minimum points
+\\\\
+Definition 5: local outlier factor of an object p is defined as
+LOF(p) = (∑o ∈ NMinPts(p)  lrd (o)/lrd (p))/|NMinPts(p)|
+\\\\
+The author of this paper proposed a modification in k-distance(distance between object and its kth nearest neighbor) to be m-distance(mean distance of an object and its k-distance neighborhood) and add one parameter to control the performance. This algorithm is called MLOF. They test it on two datasets and found out that number of correct detection in MLOF is greater than standard LOF with the same time complexity.\\\\
+
+\item {\em Use for our project}:\\
+We may be able to use this modified version of LOF to better detect outliers in the data. Then if we discard outliers, we may get better classifier model from training the remaining data\\\\
+\item {\em Shortcomings}:\\
+The author only test this algorithm on two datasets "KDDCUP99 NetworkConnectionsDataSet" and "WisconsinBreastCancerDatabase". Thus, it is not quite statistically proven that it will be doing well in other datasets too.
+
+\end{itemize*}
+
+The third paper was "Efficient Time Series Matching by Wavelets" by Kin-pong Chan and Ada Wai-chee Fu
+\begin{itemize*}
+\item {\em Main idea}:
+Main Idea: We need to reduce the number of dimension vectors to avoid dimensionality curse problem and reduce retrieval time. There are many transfomations that we can apply to our time series data such as Discrete Fourier Transform (DFT), Discrete Wavelet Transform (DWT), Karhunen-Loeve (K- L) transform or Singular Value Decomposition (SVD). The author proposed to use Haar Wavelet Transform for time series indexing. Wavelets are basis functions used in representing data or other functions. Wavelet algorithms process data differrent way from DFT where only frequency components are considered. Wavelet has time-frequency localization property so it is able to give locations in both time and frequency. The autor choose Haar wavelet for the following reasons: (1) it allows good approximation with a subset of coefficients, (2) it can be computed quickly and easily O(n), and (3) it preserves Euclidean distance. Their methods are as follows: 
+\\
+1. Pre-processing: They built index on database using an index structure such as an R-Tree by using the Haar coefficients \\\\
+2. Range Query: Similar sequences with distances less than epsilon are looked up in the index and returned. Then find the true distances in time domain to remove all false alarms \\\\
+3. Nearest Neighbor Query: They use 2 phases. First, find n nearest neighbor of query q in index. Then compute euclidean distance in full dimension between query and these neighbors. Second, perform range query using epsilon = distance of farthest neighbor in the first step. They keep a list of n nearest sequence so far and their euclidean distance. Then they keep updating the epsilon with the current farthest distance in n sequence. The nearest neighbors stored in the list are returned as answer when the range query evaluation is finished.\\\\
+They do experiment on both real and synthetic data. Real data are extracted from different equities of Hong Kong stock market from 12/7/90 to 7/11/96. Their experiment showed that K-L transform gives the best precision at each dimension. On the other hand, the precision attained by Haar transform is close to the best and it outperforms DFT significantly at all except the first dimension.
+
+\item {\em Use for our project}:\\
+We can try using wavelet like Haar transformation in our project because our dataset contain a lot of noise and spike. Standard distance function such as euclidean distance or DTW may not perform very well. Also wavelet is supposed to handle spike better than Discreet Fourier Transform.\\\\
+\item {\em Shortcomings}:\\
+The author only test this algorithm on only one real dataset so we might want to try this algorithm on several dataset from different domain, such as our project's data, to see if the result will conform to the result in this paper.
+
+\end{itemize*}
+
+The fourth paper was "Similarity Search Over Time-Series Data Using Wavelets" by Ivan Popivanov and Rene ́e J. Miller
+\begin{itemize*}
+\item {\em Main idea}:
+The authors proposed methods to do similarity search over time-series data by using various wavelet transforms. \\\\
+Firt they considered whether general wavelets can be used. They showed that all wavelet with stable reconstruction (bi-orthonormal wavelets) can be used in similarity search. They mention Chan and Fu work(the third paper I read), which state that contractive property is only known for Haar wavelet.The contractive property is that the answer of our query in the feature space, when converted back to the data space, must be a superset of the original query answer so that we can ensure no false negative or false dismisal. Also they mention Fukunaga work which prove that all orthonormal transforms (Haar wavelet is one of these) preserve Euclidean Distance (thus contractive). The authors then stated further that Euclidean distance is not in general preserved for bi-orthonormal transformations. However, they proved that we can get all the required points using sphere of radius (1/sqrt(A))E where E is query radius and A is some constant. Thus we can do similarity search using bi-orthonoramal wavelets too.\\\\
+Second, they presented a result of how different wavelets perform in this application. They found that wavelets with a relatively long (12-16) filter length have the highest precision for this application. They also get this similar result on a number of real and synthetic time-series data sets too. They also show that Daubechies 12 outperformed Haar DWT, DFT and PAA(Piecewise Aggregation Approximation).\\\\
+Finally, they identify classes of data that can be indexed efficiently using these wavelet transformations. The classes of data they studied are 1: the historical water levels of several lakes, 2: the stock dataset used in Chan and Fu work, 3: synthetically generated dataset. 
+
+\item {\em Use for our project}:\\
+This paper have a nice performance's comparison between Haars, Daubechies, and DFT in doing similarity search over time series. One of the task in our project is to find nearest neighbor between time series data of mosquito wings flapping sound so we should try applying Daubechies 12 or 16  
+\\
+\item {\em Shortcomings}:\\
+Although the author have done experiments on several classes of data, I don't see the dataset that contain only sound clips in their experiment. The experiment also don't acoount for noise or multiple data source in the same time series.
+
+\end{itemize*}
+
+
